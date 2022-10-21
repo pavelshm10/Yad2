@@ -23,11 +23,13 @@ export const Home: React.FC<any> = ({ setCoords }) => {
       navigator.geolocation.getCurrentPosition((location) => {
         setLatitude(location.coords.latitude);
         setLongitude(location.coords.longitude);
-        setCoords(location.coords.latitude,location.coords.longitude);
-        // x=location.coords.latitude;
-        // y=location.coords.longitude;
-        // props.setCoords = location.coords.toString();
-        // dispatch(coordinates({x:location.coords.latitude,y:location.coords.longitude}))
+        setCoords(location.coords.latitude, location.coords.longitude);
+        window.localStorage.setItem("lat", location.coords.latitude.toString());
+        window.localStorage.setItem(
+          "lon",
+          location.coords.longitude.toString()
+        );
+
         setMyLocation(
           `${location.coords.latitude}, ${location.coords.longitude}`
         );

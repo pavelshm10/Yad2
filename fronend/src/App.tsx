@@ -17,7 +17,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Navigate to="/home"></Navigate>} />
         <Route path="/home" element={<Home setCoords={setCoords} />} />
-        <Route path="/banks" element={<Banks latitude={latitude} longitude={longitude} />} />
+        <Route path="/banks" element={<Banks />} />
       </Routes>
     </div>
   );

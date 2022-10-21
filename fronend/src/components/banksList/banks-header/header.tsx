@@ -1,11 +1,16 @@
+import { Bank } from "../../../types/bank";
 import styles from "./header.module.scss";
 
-function Header() {
-    return (
-      <div className="banks-header">
-        banks-header
+interface bestBankProps {
+  bank: any 
+}
+
+
+export const Header: React.FC <bestBankProps>= ({bank}) => {
+  return (
+      <div className="header">
+        {bank.name}
       </div>
     );
   }
   
-  export default Header;
