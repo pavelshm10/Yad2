@@ -10,10 +10,14 @@ import { Main } from "./banks-main/main";
 
 export const Banks: React.FC = () => {
   const [banks, setBanks] = useState([]);
-  const [bestBank, setBestBank] = useState([]);
-  const [latitudeInput, setLatitudeInput] = useState(Number(window.localStorage.getItem('lat')));
-  const [longitudeInput, setLongitudeInput] = useState(Number(window.localStorage.getItem('lon')));
-  
+  const [bestBank, setBestBank] = useState({});
+  const [latitudeInput, setLatitudeInput] = useState(
+    Number(window.localStorage.getItem("lat"))
+  );
+  const [longitudeInput, setLongitudeInput] = useState(
+    Number(window.localStorage.getItem("lon"))
+  );
+
   useEffect(() => {
     const fetchData = async () => {
       let sortedBanks: any = [];
@@ -21,23 +25,55 @@ export const Banks: React.FC = () => {
       const banks = await response.json();
       sortedBanks = formatAndSort(banks?.result.banks);
       setBanks(sortedBanks);
-      // const best=bestBank(sortedBanks);
-      // setBestBank(best);
+      findBestBank(sortedBanks);
     };
     fetchData();
   }, []);
+
+  const findBestBank = (banks: Bank[]) => {
+    let uniqueChars = banks
+      .filter((item) => item.distance < 7)
+      .map((item) => item.Bank_Name)
+      .filter((element, index) => {
+        return (
+          banks
+            .filter((item) => item.distance < 7)
+            .map((item) => item.Bank_Name)
+            .indexOf(element) === index
+        );
+      });
+
+    let max = 0;
+    let bank={};
+    uniqueChars.map((item) => {
+      const count=getOccurrence(banks.filter((item) => item.distance < 7).map((item) => item.Bank_Name),item); 
+      if(max<count){
+        max=count;
+        
+        bank={name:item}
+      }
+    });
+    console.log("bank ",bank);
+    setBestBank(bank);
+    // return bank;
+  };
+
+  function getOccurrence(array:string[], value:string) {
+    return array.filter((v) => v === value).length;
+  }
 
   const formatAndSort = (banks: Bank[]) => {
     banks.map((bank, ind) => {
       banks[ind].open_today = checkIfOpenToday(bank.day_closed);
       banks[ind].distance = calculateDistance(
         bank.X_Coordinate,
-        bank.Y_Coordinate,
+        bank.Y_Coordinate
       );
-    
     });
     return banks.sort((a, b) => a.distance - b.distance);
   };
+
+ 
 
   function checkIfOpenToday(text: string) {
     const dayOfWeek = new Date().getDay();
@@ -65,13 +101,10 @@ export const Banks: React.FC = () => {
         str = " ש";
         break;
     }
-    return text.split("יום").includes(str) ? 'Close' :  'Open';
+    return text.split("יום").includes(str) ? "Close" : "Open";
   }
 
-  const calculateDistance = (
-    lat1: number,
-    lon1: number,
-  ) => {
+  const calculateDistance = (lat1: number, lon1: number) => {
     var R = 6371; // Radius of the earth in km
     var dLat = deg2rad(latitudeInput - lat1); // deg2rad below
     var dLon = deg2rad(longitudeInput - lon1);
@@ -91,9 +124,8 @@ export const Banks: React.FC = () => {
   }
   return (
     <div className={styles.banks}>
-      {/* <Header bestBank={bestBank}/> */}
-      <Main banks={banks}/>
-
+      <Header bestBank={bestBank}/>
+      <Main banks={banks} />
     </div>
   );
 };

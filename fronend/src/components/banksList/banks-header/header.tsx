@@ -2,14 +2,14 @@ import { Bank } from "../../../types/bank";
 import styles from "./header.module.scss";
 
 interface bestBankProps {
-  bank: any 
+  bestBank: any 
 }
 
 
-export const Header: React.FC <bestBankProps>= ({bank}) => {
+export const Header: React.FC <bestBankProps>= ({bestBank}) => {
   return (
-      <div className="header">
-        {bank.name}
+      <div className={styles.header}>
+        <div className={styles.header_container}>{bestBank.name}</div>
       </div>
     );
   }
