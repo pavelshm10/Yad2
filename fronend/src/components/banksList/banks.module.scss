@@ -1,0 +1,35 @@
+.banks {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.main {
+  height: 95%;
+}
+
+.footer {
+  height: 5%;
+}
+
+.back_btn {
+  margin-top: 100px;
+  width: 200px;
+  text-align: center;
+  background-color: white;
+  font-family: cursive;
+  font-size: 20px;
+  border: 1px solid black;
+  padding: 10px;
+  border-radius: 5%;
+  cursor: pointer;
+}
+
+.table {
+  background-color: white;
+  margin: auto;
+  border: 1px solid black;
+  border-radius: 5px;
+  width: 1200px;
+  font-family: cursive;
+}

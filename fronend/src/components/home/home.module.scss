@@ -1,0 +1,27 @@
+.home {
+  display: flex;
+  // height: 700px;
+  flex-direction: column;
+}
+
+.btn {
+  height: 100px;
+  width: 250px;
+  margin: 150px auto 0 auto;
+  border-radius: 5px;
+  font-family: cursive;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.location {
+  font-family: cursive;
+  font-size: 40px;
+  border: 1px solid black;
+  border-radius: 5px;
+  background-color: white;
+  margin: auto;
+  width: 500px;
+  text-align: center;
+  margin-top: 100px;
+}
