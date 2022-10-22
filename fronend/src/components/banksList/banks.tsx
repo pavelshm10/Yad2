@@ -10,13 +10,17 @@ import { Main } from "./banks-main/main";
 
 export const Banks: React.FC = () => {
   const [banks, setBanks] = useState([]);
-  const [bestBank, setBestBank] = useState({});
+  const [bestBank, setBestBank] = useState({name:''});
   const [latitudeInput, setLatitudeInput] = useState(
     Number(window.localStorage.getItem("lat"))
   );
   const [longitudeInput, setLongitudeInput] = useState(
     Number(window.localStorage.getItem("lon"))
   );
+
+  const headerClick = () => {
+    setBanks(banks.filter((item: Bank) => item.Bank_Name === bestBank.name));
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -44,21 +48,19 @@ export const Banks: React.FC = () => {
       });
 
     let max = 0;
-    let bank={};
     uniqueChars.map((item) => {
-      const count=getOccurrence(banks.filter((item) => item.distance < 7).map((item) => item.Bank_Name),item); 
-      if(max<count){
-        max=count;
-        
-        bank={name:item}
+      const count = getOccurrence(
+        banks.filter((item) => item.distance < 7).map((item) => item.Bank_Name),
+        item
+      );
+      if (max < count) {
+        max = count;
+        setBestBank({ name: item });
       }
     });
-    console.log("bank ",bank);
-    setBestBank(bank);
-    // return bank;
   };
 
-  function getOccurrence(array:string[], value:string) {
+  function getOccurrence(array: string[], value: string) {
     return array.filter((v) => v === value).length;
   }
 
@@ -72,8 +74,6 @@ export const Banks: React.FC = () => {
     });
     return banks.sort((a, b) => a.distance - b.distance);
   };
-
- 
 
   function checkIfOpenToday(text: string) {
     const dayOfWeek = new Date().getDay();
@@ -124,7 +124,7 @@ export const Banks: React.FC = () => {
   }
   return (
     <div className={styles.banks}>
-      <Header bestBank={bestBank}/>
+      <Header bestBank={bestBank} headerClick={headerClick} />
       <Main banks={banks} />
     </div>
   );
