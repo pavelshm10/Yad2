@@ -3,7 +3,7 @@ const express = require("express");
 const routes = require("./api/routes");
 const app = express();
 var router = express.Router();
-const cors = require("cors");
+// const cors = require("cors");
 const dotenv = require("dotenv");
 dotenv.config();
 const port = 3000;
