@@ -6,6 +6,7 @@ var router = express.Router();
 const cors = require("cors");
 const dotenv = require("dotenv");
 dotenv.config();
+const port=process.env.PORT || 3000
 
 app.use(function (req, res, next) {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -16,6 +17,11 @@ app.use(function (req, res, next) {
   });
   app.use("/", routes);
 
+if(process.env.NODE_ENV==='production'){
+  app.use(express.static('build'));
+  req.sendFile(path.resolve(__dirname,'build','index.html'))
+}
+
 app.listen(process.env.PORT, () => {
-  console.log(`Server is listening on port ${process.env.PORT}`);
+  console.log(`Server is listening on port `,port);
 });
