@@ -3,12 +3,13 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 const con = mysql.createConnection({
-	host: "localhost",
-	user: "root",
-	password: `pashShmil12!`,
-	port: `3306`,
-	database: "db",
+	host: "eu-cdbr-west-03.cleardb.net",
+	user: "bb9221896d7b80",
+	password: "56cbd80e",
+	database: "heroku_e0ef5323bf9331b",
 });
+
+mysql://bb9221896d7b80:56cbd80e@eu-cdbr-west-03.cleardb.net/heroku_e0ef5323bf9331b?reconnect=true
 
 con.connect(function (err) {
 	if (err) throw err;
