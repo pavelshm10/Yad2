@@ -7,7 +7,7 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 dotenv.config();
 const port = process.env.PORT || 3000;
-const path= require('path')
+const path = require("path");
 app.use(function (req, res, next) {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(
@@ -24,11 +24,9 @@ app.use(function (req, res, next) {
 app.use("/", routes);
 
 // if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname)+"/public"));
-  // app.use(express.static("build"));
-  app.get('*',(req,res)=>{
-    req.sendFile(path.resolve(__dirname, "build", "index.html"));
-  })
+app.use(express.static(path.join(__dirname) + "/public"));
+// app.use(express.static("build"));
+
 // }
 
 app.listen(process.env.PORT, () => {
