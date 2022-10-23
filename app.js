@@ -9,7 +9,7 @@ dotenv.config();
 const port = 3000;
 const path = require("path");
 app.use(function (req, res, next) {
-  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Origin", "https://yad-2-app.herokuapp.com");
   res.setHeader(
     "Access-Control-Allow-Methods",
     "GET, POST, OPTIONS, PUT, PATCH, DELETE"
