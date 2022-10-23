@@ -25,7 +25,9 @@ app.use("/", routes);
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("build"));
-  req.sendFile(path.resolve(__dirname, "build", "index.html"));
+  app.get('*',(req,res)=>{
+    req.sendFile(path.resolve(__dirname, "build", "index.html"));
+  })
 }
 
 app.listen(process.env.PORT, () => {
