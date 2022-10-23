@@ -9,7 +9,8 @@ dotenv.config();
 const port = 3000;
 const path = require("path");
 app.use(function (req, res, next) {
-  res.setHeader("Access-Control-Allow-Origin", "https://yad-2-app.herokuapp.com");
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Credentials", true);
   res.setHeader(
     "Access-Control-Allow-Methods",
     "GET, POST, OPTIONS, PUT, PATCH, DELETE"
@@ -18,7 +19,6 @@ app.use(function (req, res, next) {
     "Access-Control-Allow-Headers",
     "X-Requested-With,content-type"
   );
-  // res.setHeader('Access-Control-Allow-Credentials', true);
   next();
 });
 app.use("/", routes);
