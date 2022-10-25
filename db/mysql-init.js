@@ -2,7 +2,7 @@ var mysql = require("mysql");
 const dotenv = require("dotenv");
 dotenv.config();
 
-const con = mysql.createPool({
+const con = mysql.createConnection({
 	host: "eu-cdbr-west-03.cleardb.net",
 	user: "b260e435482cd4",
 	password: "a5e68be0",
